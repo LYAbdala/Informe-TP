@@ -1,0 +1,236 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc} % para poder usar tildes en archivos UTF-8
+\usepackage[spanish]{babel} % para que comandos como \today den el resultado en castellano
+\usepackage{a4wide} % márgenes un poco más anchos que lo usual
+\usepackage[conEntregas]{caratula}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage{Sty/algorithm2e}
+\usepackage[ruled,vlined]{algorithm2e}
+%Esto de abajo es para encabezado y pie de pagina
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+
+%Esto es para configurar márgenes
+\textheight=25cm
+\textwidth=18cm
+\topmargin=-1.5cm 
+\oddsidemargin=-1cm 
+
+\usepackage{wrapfig}
+\usepackage{multirow} 
+
+\pagestyle{fancy}
+%\fancyhf{} % clear all header and footer fields
+%\fancyfoot[R]{\footnotesize Página \thepage\ de \lastpage\}
+
+\cfoot{\thepage /\pageref{LastPage} }
+
+\newcommand\BlockIf[1]{\KwSty{If} \\ #1 \\ \KwSty{End If}}
+\newcommand\BlockElseIf[1]{\KwSty{Else If} \\ #1 \\ \KwSty{End Else If}}
+\newcommand\BlockElse[1]{\KwSty{Else} \\ #1 \\ \KwSty{End Else}}
+
+\begin{document}
+
+\titulo{Trabajo Práctico}
+\subtitulo{Primer sprint backlog}
+
+\fecha{\today}
+
+\materia{Ingeniería de Software 1}
+\grupo{}
+
+% Pongan cuantos integrantes quieran
+\integrante{Abdala Leila}{950/12}{abdalaleila@gmail.com}
+\integrante{Bernaus Andres}{699/10}{andres.bernaus@hotmail.com}
+\integrante{Gonzalez Alejandro}{32/13}{gonzalezalejandro1592@gmail.com}
+\integrante{Sabarros Ian}{661/11}{iansden@live.com}
+\integrante{Torrico Mirko}{28/10}{mirko.torrico@gmail.com}
+
+
+
+\maketitle
+
+\newpage
+\begin{comment}
+%A continuacion detallamos las User Stories que definimos para este proyecto.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|p{1.7cm}|p{3cm}|p{1cm}|p{7cm} |}
+\hline
+User stories \\
+\hline \hline 
+ Como: & Quiero: & Para: & Stories points: & Criterios de aceptacion: \\
+\hline \hline
+Usuario No Logueado & Registrarme & Loguearme & 2 & El usuario debe ingresar su dirección de email, nombre de usuario y contrase\~na, luego
+se ingresa la información en la base de datos.\\ \hline
+Usuario No Logueado & Loguearme & Poder acceder a todas las funcionalidades y a mi historial en la aplicacion. & 1 & El usuario debe ingresar su nombre de usuario y contrase\~na, luego
+se verifica la información en la base de datos.\\
+\hline
+Usuario Logueado & Buscar bar por distancia & Seleccionar un bar de acuerdo a mis preferencias & 2 & El usuario debe poder visualizar los distintos 
+bares dentro de un radio de 400mts. Al seleccionar uno de los bares de la lista se debe mostrar informacion relevante del bar. El usuario luego podra 
+volver al menu anterior o "confirmar" el bar y recibir un mapa con la ubicacion del bar, la ubicacion del usuario y el camino entre ellos.
+\\ \hline
+
+Usuario Logueado & Acceder al historial de busquedas & Poder volver a ver la informacion de bares visitados & 3 & El usuario debe poder visualizar todos los bares que alguna vez eligio.
+El usuario debe poder seleccionar uno de estos bares y obtener informacion detallada del mismo (comentarios, calificaciones, informacion general, etc).
+El usuario podra reportar un comentario hecho por otro usuario para ser revisado luego por otro moderador.\\
+\hline
+
+Usuario Logueado & Evaluar o comentar un bar & Dejar acentada una critica del mismo & 3 &
+El usuario debe poder escribir un nuevo comentario.
+El usuario debe poder dar una calificacion a cuaquiera de las categorias del Bar.
+Si el usuario ya habia dado una calificacion en una categoria ya puntuada se realizara el cambio. Es decir, se eliminara la calificacion anterior y se la reemplazara por la nueva.
+El usuario podra editar o eliminar un comentario que haya realizado sobre dicho bar.\\ \hline
+
+Usuario Logueado & Seleccionar una o mas categorias existentes & Realizar una busqueda con prioridad sobre dichos parametros & 2 &
+El usuario debe poder visualizar todas las opciones posibles a la hora de elegir una categoria.
+El usuario debe poder elegir una categoria y luego la lista de resultados debe ordenarse conforme a dicha eleccion.\\ \hline
+
+Usuario Logueado & Solicitar el registro de un nuevo bar en la base de datos & Compartir informacion sobre dicho bar & 2 &
+La direccion enviada por el usuario debe ser valida (debe existir).
+Una vez ingresada la direccion y el nombre del nuevo bar se debe crear una nueva entrada en el sistema para notificar el deseo de los usuarios de dar de alta el mismo.
+\\ \hline
+
+Moderador & Eliminar un bar de la base de datos & Atender solicitudes de baja por parte de usuarios. & 5 &
+El moderador debe ingresar la direccion del local
+Una vez ingresada se validara y obtendra la latitud/longitud de la misma.
+El moderador obtendra el bar buscado y podra marcarlo como eliminado. Evitando que los usuarios puedan acceder a la informacion del mismo.
+
+\\ \hline
+
+\end{tabular}
+\end{center}
+\end{table}\newpage
+
+
+\begin{table}[htbp][H]
+\begin{center}
+\begin{tabular}{|l|p{1.7cm}|p{3cm}|p{1cm}|p{8cm} |}
+\hline
+ Como: & Quiero: & Para: & Stories points: & Criterios de aceptacion: \\
+\hline \hline
+
+
+Moderador & Agrega un bar a la base de datos & Atender solicitudes de alta por parte de usuarios. & 2 &
+
+El moderador debe ingresar la direccion del local
+Una vez ingresada se validara y obtendra la latitud/longitud de la misma.
+El moderador obtendra el bar buscado y podra crear una nueva entrada con toda la informacion obtenida (nombre, lat, long, calle y categorias necesarias, etc).
+
+\\ \hline
+
+
+Moderador & Acceder y poder eliminar los comentarios repostados & Atender quejas por parte de usuarios. & 2 &
+El moderador debe poder observar todos los comentarios que hayan sido reportados. Estos deben estar en orden descendente segun la cantidad de "solicitudes".
+Aquellos comentarios con menos de $\lambda$ solicitudes no seran mostrados.
+El moderador debe poder eliminar el comentario.
+El moderado de debe poder marcar un comentario como verificado.
+El moderador debe poder enviar un ``aviso''(warning) al usuario, en caso de tener $\mu$ cantidad el usuario sera suspendido.\\
+\hline
+
+Moderador & Otorgar permiso de moderador a un usuario & Ayudar a administrar la aplicacion. & 2 &
+El moderador debe poder ingresar un usuario y, en caso de existir en el sistema, debera aparecer como resultado.
+Una vez encontrado podra marcarlo como moderador.
+El usuario moderado podra acceder a todas las funcionalidades correspondientes.
+\\
+\hline
+
+Moderador & Acceder a las solicitudes de alta de bares por parte de los usuarios & Determinar que bares registrar & 3 &
+El moderador debera poder visualizar una lista de direcciones y nombres ordenadas por cantidad de solicitudes.
+El moderador podra dar de alta el bar o rechazar las solicitudes generadas (en caso de que el bar haya sido dado de baja).
+
+\\
+\hline
+
+Moderador & Agregar nuevas caracteristicas para evaluar los bares & Brindar mayor informacion a los usuarios & 2 &
+El moderador debe poder ingresar la categoria deseada.
+Una vez ingresada la categoria cualquier bar del sistema debera tener la nueva categoria como parte de su informacion.
+
+\\ \hline
+
+\end{tabular}
+\end{center}
+\end{table}
+\newpage
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|p{8cm}|p{1cm}|p{1cm}|}
+\hline
+Prime Sprint:\\ \hline \hline
+
+User Storie & Tareas: & Horas: & Total: \\
+\hline \hline
+
+\multirow{3}{2cm}{Buscar bar por distacia} & Crear entorno de programacion & 2 & \\ \cline{2-4}
+& Medir distacias a nuestra direccion & 3 & \\ \cline{2-4}
+& Crear interfaz grafica & 3 & 8\\ \cline{1-4}
+\hline \hline
+\multirow{3}{2cm}{Agregar bar} & Crear entorno de programacion & 2 & \\ \cline{2-4}
+& Ubicar bar en el mapa & 2 & \\ \cline{2-4}
+& Crear interfaz grafica & 3 & 7\\ \cline{1-4}
+
+\hline \hline
+\multirow{3}{2cm}{Registrarme} & Crear entorno de programacion & 2 & \\ \cline{2-4}
+& Verificar datos y agregarlos a la base de datos & 5 & \\ \cline{2-4}
+& Crear interfaz grafica & 2 & 9\\ \cline{1-4}
+\hline \hline
+\multirow{3}{2cm}{Loguearme} & Crear entorno de programacion & 2 & \\ \cline{2-4}
+& Verificar datos & 1 & \\ \cline{2-4}
+& Crear interfaz grafica & 1 & 4\\ \cline{1-4}
+\hline \hline
+\multirow{3}{2cm}{Eliminar bar} & Crear entorno de programacion & 2 & \\ \cline{2-4}
+& Verificar datos del bar& 1 & \\ \cline{2-4}
+& Verificar datos del usuario& 1 & \\ \cline{2-4}
+& Eliminar datos de la base de datos& 5 & \\ \cline{2-4}
+& Crear interfaz grafica & 3 & 13\\ \cline{1-4}
+
+\end{tabular}
+\end{center}
+\end{table}
+\end{comment}
+
+\section{Introduccion}
+
+Dada la pachorra de cierto grupo de estudiantes para juntarse a estudiar en una biblioteca, nos encontramos con el problema de localizar bares con ciertas caracteristicas del 
+agrado de los pachorrientos estudiantes. Estos mismos proveyeron una muy breve y ambigua descripcion de su problema, el cual pretendemos resolver mediante el desarrrollo de una 
+aplicacion web llamada Wi-FindBar (porque algo solo es cheto si esta en ingles). 
+
+El presente informe muestra el diseno de la aplicacion, asi como el desarrollo de la misma hasta el dia de la fecha. Para el diseno se uso programacion orientada a objetos, 
+principalmente las tecnicas de doble dispatch y polimorfismo. Para el desarrollo usamos la porqueria (...) de Scrum, ya que nos permite empezar a trabajar de manera incremental, sin tener
+pleno conocimiento del cominio del problema.
+
+\section{User Stories}
+
+A continuacion presentamos el conjunto de User Stories que conformaran nuestra aplicacion, con las decisiones que acompana a cada una.
+
+En principio identificamos los roles involucrados.
+\begin{itemize}
+ \item Buscador: Este rol se encarga de realizar todas las busquedas, ya sea por distancia, por categoria o buscar la menor ruta a determinado bar.
+ \item Editor: Es el 
+ \item Comentador:
+ \item Votador:
+ 
+ 
+\end{itemize}
+
+
+\section{Burndown Charts}
+
+\section{Product Increment}
+
+\section{Retrospectiva}
+
+\section{Diseno}
+
+
+
+
+\end{document}
