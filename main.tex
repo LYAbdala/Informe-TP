@@ -197,186 +197,31 @@ User Storie & Tareas: & Horas: & Total: \\
 \end{table}
 \end{comment}
 
-\section{Introduccion}
-
-Dada la pachorra de cierto grupo de estudiantes para juntarse a estudiar en una biblioteca, nos encontramos con el problema de localizar bares con ciertas caracteristicas del 
-agrado de los pachorrientos estudiantes. Estos mismos proveyeron una muy breve y ambigua descripcion de su problema, el cual pretendemos resolver mediante el desarrrollo de una 
-aplicacion web llamada Wi-FindBar (porque algo solo es cheto si esta en ingles). 
-
-El presente informe muestra el diseno de la aplicacion, asi como el desarrollo de la misma hasta el dia de la fecha. Para el diseno se uso programacion orientada a objetos, 
-principalmente las tecnicas de doble dispatch y polimorfismo. Para el desarrollo usamos la porqueria (...) de Scrum, ya que nos permite empezar a trabajar de manera incremental, sin tener
-pleno conocimiento del cominio del problema.
+\section{Introducción}
+\input{introduccion}
 
 \section{Backlog}
+\input{backlog}
 
-A continuacion presentamos el conjunto de User Stories que conformaran nuestra aplicacion, con las decisiones que acompana a cada una.
-
-En principio identificamos los roles involucrados.
-\begin{itemize}
- \item Buscador de bares: Este rol se encarga de realizar todas las busquedas, ya sea por distancia, por categoria o buscar la menor ruta a determinado bar.
- \item Editor de guias: Es el encargado de la guia de bares. Sus responsabilidades se limitan a agragar y eliminar bares en la guia.
- \item Comentador de bares: Este rol administra los comentarios.
- \item Calificador de bares: Este rol es el encargado de conocer y manejar las categorias de clasificacion de los bares, asi como las calificaciones que estos reciben de los usuarios.
-\end{itemize}
 
 \subsection{User Stories}
-
-Las blahblahblah (...) user stories representan los casos blahblahblah
-
-\begin{enumerate}
- \item US
- 
-Queremos poder filtrar los bares que esten a 400 mts de mi posicion. Esto es para determinar caules son los bares que estan a una distancia razonable para llegar caminando. Ya que nuestra
-aplicacion consiste basicamente en un buscador de bares, consideramos que esto forma parte de la funcionaldad indispensable esperada por nuestros inversores %putos
-por lo que tiene un gran Bussines Value.
-\paragraph{Como:} Buscador.
-\paragraph{Quiero:} Filtrar bares por distancia.
-\paragraph{Para:} Determinar, de acuerdo a mis requerimientos, cuales son los bares plausibles que puedo visitar.
-\paragraph{Story Point:} 3
-\paragraph{Bussines Value:} 10
-
-
- \item US
- 
-Nuestros usuarios quieren no solo poder ver la distancia, sino que les interesa que los bares devueltos cumplan con ciertas caracteristicas particulares. Como para cada usuario estos
-requerimientos son diferentes, esta us contempla poder evaluar varias categorias diferentes. Ademas, como en el caso anterior, esto es parte indispensable de la funcionalidades
- por lo que el Bussines Value es equivalente al caso anterior.
-\paragraph{Como:} Buscador
-\paragraph{Quiero:} filtrar por categoria
-\paragraph{Para:}
-\paragraph{Story Point:} 3
-\paragraph{Bussines Value:} 10
-
- \item US
- 
- 
-\paragraph{Como:} Buscador
-\paragraph{Quiero:} ver camino minimo
-\paragraph{Para:}
-\paragraph{Story Point:} 3
-\paragraph{Bussines Value:} 8 
-
- \item US
-\paragraph{Como:} Editor
-\paragraph{Quiero:} agregar bar
-\paragraph{Para:}
-\paragraph{Story Point:} 1
-\paragraph{Bussines Value:} 8
-
-
- \item US
-\paragraph{Como:} Editor
-\paragraph{Quiero:} eliminar bar
-\paragraph{Para:}
-\paragraph{Story Point:}1 
-\paragraph{Bussines Value:}5
-
-
-
- \item US
-\paragraph{Como:} Comentador
-\paragraph{Quiero:} hacer comentario
-\paragraph{Para:}
-\paragraph{Story Point:}3
-\paragraph{Bussines Value:}5
-
-
- \item US
-\paragraph{Como:} Comentador
-\paragraph{Quiero:}ver comentarios de un bar 
-\paragraph{Para:}
-\paragraph{Story Point:}2
-\paragraph{Bussines Value:} 5
-
-
- \item US
-\paragraph{Como:} calificador (votador)
-\paragraph{Quiero:} votar bar por categoria x
-\paragraph{Para:}
-\paragraph{Story Point:}1
-\paragraph{Bussines Value:} 8
-
-
- \item US
-\paragraph{Como:} Calificador (votador)
-\paragraph{Quiero:}ver calificaciones
-\paragraph{Para:}
-\paragraph{Story Point:}2
-\paragraph{Bussines Value:}5
-
-\end{enumerate}
-
+\input{userStories}
 
 
 \section{Burndown Charts}
+\input{burndownCharts}
 
 \section{Product Increment}
+\input{productIncrement}
 
 \section{Retrospectiva}
-En esta seccion chamuyaremos sobre los problemas hallados y demas bobadas (...) ocurridas durante los sprint.
-
-\subsection{Primer diseño}
-
-En principio planteamos un diseño sobre el cual iteramos en cada sprint. A continuacion los describiremos brevemente para darl al lector una idea de la evolucion del diseño, sin embargo
-no haremos demaciado incapie en esto pues no es el diseño final sobre el que trabajamos.
-
-En nuestro diseño consideramos como centrales los siguientes puntos. 
-
-Metodo buscar bares: La idea de este metodo era tener un mensaje polimorfico al que pudiesemos pasarle cualquier tipo de
-requerimientos (los cuales probablemente deberian haber sido implementador mediante cloures) y devolviera la lista de bares que los cumpliesen. Para esto El objeto encargado 
-de buscar los bares deberia conocer la forma de almacenarlos.
-
-Roles: Nuestros principales roles se basaron en principio en los distintos tipos de permisos que tendrian los usuarios, siendo ellos No registrado, Registrado y Moderador. A cada 
-uno de estos les correspondian diferentes funcionalidades que podian o no pertenecer a uno de los otros usarios. Por ejemplo, un usuario no registrado puede buscar al igual que uno registrado
-o que un moderados, sin embargo, el moderador podia eliminar bares, cosa que un usuario registrado no podria.
-
-Objeto bases de datos: Consideramos tres bases de datos diferentes, una para regitras usuarios, una para almacenar la informacion de los bares y otra par aalmacenar los comentarios y calificaciones
-realizadas por los usuarios. Esta tres bases de datos estaban fuertemente acopladas entre si, ya que, por ejemplo, la base de datos de votaciones conocia a los bares y a los usuarios.
-
-Objeto bar: El objeto bar contenia toda la informacion asociada al mismo. Es decir, nombre, direccion, pocision, sus calificaciones, comentarios y una brebe descripcion del mismo. Es 
-decir, que el objeto bar contenia toda la informacion necesaria para responder por si mismo la toda la funcionalidad pedida. 
-
-Metodos de administracion de bares: Estos metodos se referian a la creacion, eliminacion y modificacion de bares, teniendo acceso a la base de datos de bares y de votaciones.
-
-
-Metodos de administracion de usuarios: Estos metodos se referian a la creacion, eliminacion y modificacion de usuarios, teniendo acceso a la base de datos de usuarios y de votaciones.
-
-
-\subsection{Primer Sprint}
-
-Durante el primer sprint detectamos problemas con el diseno de los usuarios. Al querer modificar el status de un usuario debiamos destruir el usuario y crearlo de nuevo, asignandole su nuevo
-permiso. Esto fue debido a que habiamos definido una clase usuario abstracta de la cual se heredaban los usuarios logueado y no logueado. Para evitar esto, definimos un ingresante a la aplicacion sin ningun permiso, que solo podia buscar. Al loquearse este era destruido y se creaba
-un nuevo objeto que representaba un usuario ya logueado.
-
-Los nuevos roles que consideramos fueron seleccionados de acuerdo a la funcionalidad que proveia cada uno. Asi indentificamos a los roles Buscador de bares, Editor de guias, Comentador
-de bares, Calificador de bares, descriptos en la seccion 2. A partir de estos surgieron nuevos objetos y metodos, y se modificaron los ya existentes.
-
-Objeto Bar: Dada el alto acloplamiento que tenia este objeto, lo redisenamos intentando capturar solo su esencia. Esto resulto en que el objeto bar solo conoce su nombre y direccion. 
-Los demas datos que almacenaba delegados a nuevos objetos.
-
-Objeto Guia de bares: es el encargado de almacenar los bares. A partir de este objeto es que el buscador puede empezar a buscar bares por distancias.
-
-Objeto GPS: Encargado de calcular las posiciones de los bares respecto a su direccion. Conoce ademas la posicion actual del usuario y es capaz de medir distancias.
-
-objeto Regulador de calificaciones:
-
-Objeto XXX comentarios:
-
-Objeto Mapa:
-
-\subsection{Segundo Sprint}
-
-Luego de la primer demo, en la que presentamos a nuestros inversores la funcionalidad del primer sprint, nos dimos cuenta que los usuarios 
-no representaban parte valiosa de los funcionalidad. A partir de esto decidimos quitar los permisos de usuarios de nuestro problema. Asi consideramos un usuario generico con permiso de 
-acceder a todos los metodos de la aplicion.
-
-\subsection{A futuro}
-
-
+\input{retrospectiva}
 
 \section{Diseno}
-
 \input{casosdedisenio.tex}
+
+\section{Conclusión}
+\input{conclusion}
 
 
 \end{document}
